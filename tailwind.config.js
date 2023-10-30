@@ -41,6 +41,12 @@ module.exports = {
           '100%': { transform: 'scale(0)' },
         },
       },
+      fontFamily: {
+        primary: ['Poppins'],
+        Catamaran: ['Catamaran'],
+        openSans: ['Open Sans'],
+        Anton: ['Anton'],
+      },
     },
   },
-};
+}
