@@ -24,7 +24,12 @@ export const api = createApi({
         // },
       }),
     }),
+    getMovieGenres: builder.query({
+      query: () => ({
+        url: 'genre/movie/list',
+      }),
+    }),
   }),
 })
 
-export const { useGetTopMoviesQuery } = api
+export const { useGetTopMoviesQuery, useGetMovieGenresQuery } = api
