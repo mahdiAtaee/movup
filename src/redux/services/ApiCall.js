@@ -29,7 +29,12 @@ export const api = createApi({
         url: 'genre/movie/list',
       }),
     }),
+    getPopularMovies: builder.query({
+      query: () => ({
+        url: 'movie/popular',
+      }),
+    }),
   }),
 })
 
-export const { useGetTopMoviesQuery, useGetMovieGenresQuery } = api
+export const { useGetTopMoviesQuery, useGetMovieGenresQuery, useGetPopularMoviesQuery } = api

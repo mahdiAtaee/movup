@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { useGetMovieGenresQuery } from '../redux/services/ApiCall'
+import Avatar from '../assets/avatar2.jpg'
 
 function UserConfig() {
   const { data } = useGetMovieGenresQuery()
@@ -23,9 +24,9 @@ function UserConfig() {
         </div>
         <div>
           <img
-            src="../assets/avatar.jpg"
+            src={Avatar}
             alt="avatar"
-            className="w-[60px] h-[60px] rounded-full border-2 border-orange-700"
+            className="w-[60px] h-[60px] rounded-full border-4 border-orange-700"
           />
         </div>
       </div>
