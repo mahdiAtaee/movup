@@ -34,7 +34,40 @@ export const api = createApi({
         url: 'movie/popular',
       }),
     }),
+    getTopRatedMovies: builder.query({
+      query: () => ({
+        url: 'movie/top_rated',
+      }),
+    }),
+    getNewTrailerMovies: builder.query({
+      query: () => ({
+        url: 'discover/movie',
+        params: {
+          sort_by: 'primary_release_date.desc',
+          include_video: true,
+          include_adult: 'false',
+          page: 60,
+        },
+      }),
+    }),
+    getTrailerMovies: builder.query({
+      query: (movieId) => ({
+        url: `movie/${movieId}/videos`,
+        params: {
+          sort_by: 'primary_release_date.desc',
+          include_video: true,
+          include_adult: 'false',
+        },
+      }),
+    }),
   }),
 })
 
-export const { useGetTopMoviesQuery, useGetMovieGenresQuery, useGetPopularMoviesQuery } = api
+export const {
+  useGetTopMoviesQuery,
+  useGetMovieGenresQuery,
+  useGetPopularMoviesQuery,
+  useGetTopRatedMoviesQuery,
+  useGetNewTrailerMoviesQuery,
+  useGetTrailerMoviesQuery,
+} = api

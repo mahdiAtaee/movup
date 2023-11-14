@@ -1,19 +1,45 @@
 import { Link } from 'react-router-dom'
 import { MdKeyboardArrowDown } from 'react-icons/md'
+import { AiOutlinePlus } from 'react-icons/ai'
+import { TiTick } from 'react-icons/ti'
+import { useState } from 'react'
 import { useGetMovieGenresQuery } from '../redux/services/ApiCall'
 import Avatar from '../assets/avatar2.jpg'
+import SearchMovies from './SearchMovies'
 
 function UserConfig() {
+  const [genresSelect, setGenresSelect] = useState([])
   const { data } = useGetMovieGenresQuery()
+  const handleClickGenre = (genre) =>
+    // eslint-disable-next-line implicit-arrow-linebreak
+    setGenresSelect((oldarray) => {
+      const index = genresSelect.indexOf(genre.name)
+      if (index === -1) {
+        return [...oldarray, genre.name]
+      }
+      return oldarray.filter((item) => item !== genre.name)
+    })
+
   const genres = data?.genres?.map((genre) => (
     <li
-      className="flex items-center justify-end mt-3 p-2 cursor-pointer group font-openSans"
+      className={`flex items-center justify-between gap-4 mt-3 py-4 px-6 cursor-pointer font-openSans w-fit h-12 rounded-full hover:bg-red-300 ${
+        genresSelect.includes(genre.name) ? 'bg-red-600 rounded-full' : ' bg-gray-600 bg-opacity-5 '
+      }`}
       key={genre.id}>
-      <Link to={genre.id} className="group-hover:text-[#ff5c00] group-hover:font-bold text-base">
+      {genresSelect.includes(genre.name) ? (
+        <TiTick color="white" />
+      ) : (
+        <AiOutlinePlus fontWeight={800} />
+      )}
+      <Link
+        to={genre.id}
+        onClick={() => handleClickGenre(genre)}
+        className={genresSelect.includes(genre.name) ? 'text-white font-bold' : 'font-bold'}>
         {genre.name}
       </Link>
     </li>
   ))
+
   return (
     <div className="p-4 overflow-auto ml-4 w-[23vw] border-l" dir="rtl">
       <div className="h-[100px] flex items-center justify-around cursor-pointer gap-2 w-full">
@@ -30,11 +56,12 @@ function UserConfig() {
           />
         </div>
       </div>
-      <ul>
+      <SearchMovies />
+      <ul className="flex flex-col">
         <li className="flex items-center justify-end mt-3 p-2 group font-openSans text-xl font-bold">
           Genres
         </li>
-        {genres}
+        <ul className="flex flex-wrap gap-x-4">{genres}</ul>
       </ul>
     </div>
   )
