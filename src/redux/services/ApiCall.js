@@ -30,8 +30,11 @@ export const api = createApi({
       }),
     }),
     getPopularMovies: builder.query({
-      query: () => ({
+      query: (page) => ({
         url: 'movie/popular',
+        params: {
+          page,
+        },
       }),
     }),
     getTopRatedMovies: builder.query({

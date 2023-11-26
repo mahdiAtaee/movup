@@ -34,7 +34,7 @@ function PopularMovies() {
         </div>
         <div className="absolute bottom-8 right-4 flex items-center gap-2">
           <Link
-            to="/"
+            to={`popular-movies/${movie?.id}`}
             className="transition py-2 px-4 rounded-full text-white font-openSans text-lg bg-red-600 bg-opacity-70 border-4 border-red-700 hover:bg-red-900 ease-in">
             Watch now
           </Link>

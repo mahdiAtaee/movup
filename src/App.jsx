@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { Sidebar } from './components'
+import { MovieDetail, Sidebar } from './components'
 import Discover from './pages/Discover'
 import Topbar from './components/Topbar'
 import UserConfig from './components/UserConfig'
@@ -16,6 +16,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Discover />} />
             <Route path="popular-movies" element={<PopularMovies />} />
+            <Route path="/popular-movies/:id" element={<MovieDetail />} />
+            <Route path="/top-rated/:id" element={<MovieDetail />} />
           </Routes>
         </div>
       </div>

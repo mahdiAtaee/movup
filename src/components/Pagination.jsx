@@ -1,54 +1,74 @@
-import { useState } from "react"
+import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md'
 
-/* eslint-disable react/jsx-no-useless-fragment */
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-function Items({ currentItems }) {
+function PaginatedItem({ pageNumber, currentPage, handlePageClick }) {
   return (
-    <>
-      {currentItems
-        && currentItems.map((item) => (
-          <div>
-            <h3>Item #{item}</h3>
-          </div>
-        ))}
-    </>
+    <span
+      className={`min-w-12 h-12  rounded-lg p-2 cursor-pointer text-xl mx-2 text-center border-4 ${
+        currentPage === pageNumber
+          ? 'border-blue-500 text-blue-500 hover:bg-blue-300'
+          : 'border-gray-400 hover:bg-gray-200'
+      } flex items-center justify-center font-bold border-4 border-gray-400`}
+      onClick={() => handlePageClick(pageNumber)}>
+      {pageNumber}
+    </span>
   )
 }
 
-function PaginatedItems({ itemsPerPage }) {
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
-  const [itemOffset, setItemOffset] = useState(0)
-
-  // Simulate fetching items from another resources.
-  // (This could be items from props; or items loaded in a local state
-  // from an API endpoint with useEffect and useState)
-  const endOffset = itemOffset + itemsPerPage
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`)
-  const currentItems = items.slice(itemOffset, endOffset)
-  const pageCount = Math.ceil(items.length / itemsPerPage)
-
-  // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length
-    console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`)
-    setItemOffset(newOffset)
-  }
-
+function PaginatedItems({
+  currentPage,
+  totalPages,
+  handleNextPageClick,
+  handlePrevPageClick,
+  handlePageClick,
+}) {
   return (
-    <>
-      <Items currentItems={currentItems} />
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
+    <div className="mt-8 flex items-center w-full justify-center">
+      <MdNavigateBefore
+        className={`w-12 h-12 rounded-lg p-2 ${
+          currentPage === 1
+            ? 'cursor-not-allowed bg-gray-400 text-white'
+            : 'cursor-pointer border-4 border-gray-400'
+        }  text-xl mx-2 inline-block text-center`}
+        onClick={(e) => handlePrevPageClick(e, currentPage)}
       />
-    </>
+      <PaginatedItem currentPage={currentPage} pageNumber={1} handlePageClick={handlePageClick} />
+      <PaginatedItem currentPage={currentPage} pageNumber={2} handlePageClick={handlePageClick} />
+      <PaginatedItem currentPage={currentPage} pageNumber={3} handlePageClick={handlePageClick} />
+      {currentPage > 3 && (
+        <>
+          <span className="w-12 h-12 rounded-lg p-2 cursor-pointer text-xl mx-2 text-center font-bold border-4 border-gray-400">
+            ...
+          </span>
+          <PaginatedItem
+            currentPage={currentPage}
+            pageNumber={currentPage}
+            handlePageClick={handlePageClick}
+          />
+          <PaginatedItem
+            currentPage={currentPage}
+            pageNumber={currentPage + 1}
+            handlePageClick={handlePageClick}
+          />
+        </>
+      )}
+      <span className="w-12 h-12 rounded-lg p-2 cursor-pointer text-xl mx-2 text-center font-bold border-4 border-gray-400">
+        ...
+      </span>
+      <PaginatedItem
+        currentPage={currentPage}
+        pageNumber={totalPages}
+        handlePageClick={handlePageClick}
+      />
+      <MdNavigateNext
+        className={`w-12 h-12  rounded-lg p-2 ${
+          currentPage === totalPages
+            ? 'cursor-not-allowed bg-gray-400 text-white'
+            : 'cursor-pointer border-4 border-gray-400'
+        } cursor-pointer border-4 text-xl mx-2 inline-block text-center border-gray-400`}
+        onClick={(e) => handleNextPageClick(e, currentPage, totalPages)}
+      />
+    </div>
   )
 }
 
-export default Pagination
+export default PaginatedItems
