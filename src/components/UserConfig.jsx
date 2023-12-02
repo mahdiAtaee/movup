@@ -3,11 +3,13 @@ import { MdKeyboardArrowDown } from 'react-icons/md'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useGetMovieGenresQuery } from '../redux/services/ApiCall'
 import Avatar from '../assets/avatar2.jpg'
 import SearchMovies from './SearchMovies'
 
 function UserConfig() {
+  const { rightSideStatus } = useSelector((state) => state.themeSlice)
   const [genresSelect, setGenresSelect] = useState([])
   const { data } = useGetMovieGenresQuery()
   const handleClickGenre = (genre) =>
@@ -41,7 +43,9 @@ function UserConfig() {
   ))
 
   return (
-    <div className="p-4 overflow-auto ml-4 w-[23vw] border-l" dir="rtl">
+    <div
+      className={`overflow-auto ${rightSideStatus ? 'p-4 w-[23vw] ml-4' : 'w-0 p-0'} border-l`}
+      dir="rtl">
       <div className="h-[100px] flex items-center justify-around cursor-pointer gap-2 w-full">
         <MdKeyboardArrowDown size={24} />
         <div>
