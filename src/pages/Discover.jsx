@@ -5,9 +5,9 @@ import TopRatedMovies from '../components/TopRatedMovies'
 
 function Discover() {
   const { rightSideStatus } = useSelector((state) => state.themeSlice)
-  console.log(rightSideStatus)
+
   return (
-    <div className={`${rightSideStatus ? 'w-[60vw]' : 'w-[83vw]'}`}>
+    <div className={`transition-all duration-500 ${rightSideStatus ? 'w-[60vw]' : 'w-[83vw]'}`}>
       <PopularMovies />
       <TopRatedMovies />
     </div>

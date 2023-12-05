@@ -11,7 +11,7 @@ import 'swiper/css/free-mode'
 function TopRatedMovies() {
   const { data } = useGetTopRatedMoviesQuery()
 
-  const Movies = data?.results?.slice(0, 5).map((movie) => (
+  const Movies = data?.results?.slice(0, 10).map((movie) => (
     <SwiperSlide
       key={movie.id}
       className="my-4 rounded-xl shadow-md relative"

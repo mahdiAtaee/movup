@@ -8,14 +8,11 @@ const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    RIGHT_SIDE_TOGGLE: (state, action) => {
-      console.log(action.type)
-      console.log(state)
-      return {
-        ...state,
-        rightSideStatus: !state.rightSideStatus,
-      }
-    },
+    // eslint-disable-next-line no-unused-vars
+    RIGHT_SIDE_TOGGLE: (state, action) => ({
+      ...state,
+      rightSideStatus: !state.rightSideStatus,
+    }),
   },
 })
 

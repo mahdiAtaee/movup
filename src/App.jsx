@@ -16,7 +16,7 @@ const App = () => {
         <Topbar />
 
         <div
-          className={`px-2 ${
+          className={`px-2 transition-all duration-500 ${
             rightSideStatus ? 'w-[60vw]' : 'w-[83vw]'
           } h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse`}>
           <div className="flex-1 h-fit pb-40">
