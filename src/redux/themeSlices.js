@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  rightSideStatus: true,
+  rightSideStatus: false,
 }
 
 const themeSlice = createSlice({

@@ -3,7 +3,7 @@ import IMDB from '../assets/imdb.png'
 
 function MoviesCard({ movie }) {
   return (
-    <Link to={`/popular-movies/${movie?.id}`}>
+    <Link to={`/overview/popular-movies/${movie?.id}`}>
       <div className="relative h-[400px] rounded-full">
         <div className="absolute top-0 right-0 left-0 bottom-0 w-full h-full bg-black opacity-30" />
         <img

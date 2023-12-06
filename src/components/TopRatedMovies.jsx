@@ -34,7 +34,7 @@ function TopRatedMovies() {
         </span>
         <div className="absolute bottom-8 right-4 flex items-center gap-2">
           <Link
-            to={`top-rated/${movie?.id}`}
+            to={`/overview/top-rated/${movie?.id}`}
             className="transition py-2 px-4 rounded-full text-white font-openSans text-sm bg-red-700 bg-opacity-80 border-4 border-red-800 hover:bg-red-900 ease-in">
             Watch now
           </Link>

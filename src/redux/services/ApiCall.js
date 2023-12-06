@@ -63,6 +63,11 @@ export const api = createApi({
         },
       }),
     }),
+    getMoviesDetail: builder.query({
+      query: (movieId) => ({
+        url: `movie/${movieId}`,
+      }),
+    }),
   }),
 })
 
@@ -73,4 +78,5 @@ export const {
   useGetTopRatedMoviesQuery,
   useGetNewTrailerMoviesQuery,
   useGetTrailerMoviesQuery,
+  useGetMoviesDetailQuery,
 } = api

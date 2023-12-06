@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom'
 import { BsBell, BsGrid } from 'react-icons/bs'
 import { BiSearchAlt2 } from 'react-icons/bi'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { TopBarLinks } from '../assets/constant'
 import { RIGHT_SIDE_TOGGLE } from '../redux/themeSlices'
 
 function Topbar() {
   const dispatch = useDispatch()
-  const { rightSideStatus } = useSelector((state) => state.themeSlice)
   const handleToggleUserConfig = () => {
     dispatch({ type: RIGHT_SIDE_TOGGLE })
   }
@@ -21,10 +20,7 @@ function Topbar() {
     </li>
   ))
   return (
-    <div
-      className={`flex items-center justify-between ${
-        rightSideStatus ? 'w-[60vw]' : 'w-[83vw] pl-4'
-      } h-[100px]`}>
+    <div className="flex items-center justify-between w-[100vw] h-[100px] px-4 border-b-2">
       <div className="flex items-center justify-between">{TopbarLinks}</div>
       <div className="flex items-center gap-2 cursor-pointer">
         <BiSearchAlt2 size={28} />

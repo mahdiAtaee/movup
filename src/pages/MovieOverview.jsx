@@ -1,7 +1,7 @@
 import { MovieDetail } from '../components'
 
-function Movie() {
+function MovieOverview() {
   return <MovieDetail />
 }
 
-export default Movie
+export default MovieOverview
