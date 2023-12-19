@@ -15,13 +15,11 @@ export const api = createApi({
   }),
   endpoints: (builder) => ({
     getTopMovies: builder.query({
-      query: () => ({
+      query: (page = 1) => ({
         url: 'discover/movie',
-        // params: {
-        //   locale: 'en-US',
-        //   pageSize: '50',
-        //   startFrom: '20',
-        // },
+        params: {
+          page,
+        },
       }),
     }),
     getMovieGenres: builder.query({
@@ -68,6 +66,41 @@ export const api = createApi({
         url: `movie/${movieId}`,
       }),
     }),
+    getMovieCredits: builder.query({
+      query: (movieId) => ({
+        url: `movie/${movieId}/credits`,
+      }),
+    }),
+    getMovieImages: builder.query({
+      query: (movieId) => ({
+        url: `movie/${movieId}/images`,
+      }),
+    }),
+    getMovieReviews: builder.query({
+      query: (movieId) => ({
+        url: `movie/${movieId}/reviews`,
+      }),
+    }),
+    getMovieSimilar: builder.query({
+      query: (movieId) => ({
+        url: `movie/${movieId}/similar`,
+      }),
+    }),
+    getMovieRecommendations: builder.query({
+      query: (movieId) => ({
+        url: `movie/${movieId}/recommendations`,
+      }),
+    }),
+    getMovieVideos: builder.query({
+      query: (movieId) => ({
+        url: `movie/${movieId}/videos`,
+      }),
+    }),
+    getTrendMovies: builder.query({
+      query: (timeWindow) => ({
+        url: `trending/all/${timeWindow}`,
+      }),
+    }),
   }),
 })
 
@@ -79,4 +112,11 @@ export const {
   useGetNewTrailerMoviesQuery,
   useGetTrailerMoviesQuery,
   useGetMoviesDetailQuery,
+  useGetMovieCreditsQuery,
+  useGetMovieImagesQuery,
+  useGetMovieReviewsQuery,
+  useGetMovieSimilarQuery,
+  useGetMovieRecommendationsQuery,
+  useGetMovieVideosQuery,
+  useGetTrendMoviesQuery,
 } = api

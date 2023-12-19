@@ -9,9 +9,12 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
+    "@tomickigrzegorz/react-circular-progress-bar": "^1.1.2",
     "axios": "^0.27.2",
     "react": "^18.2.0",
+    "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
+    "react-gradient-progress": "^1.0.3",
     "react-icons": "^4.4.0",
     "react-paginate": "^8.2.0",
     "react-redux": "^8.0.2",

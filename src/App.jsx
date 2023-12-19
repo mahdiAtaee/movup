@@ -20,6 +20,7 @@ const App = () => {
           <Route path="/overview" element={<OverviewLayout />}>
             <Route index element={<MovieOverview />} />
             <Route path="popular-movies/:id" element={<MovieOverview />} />
+            <Route path=":id" element={<MovieOverview />} />
             <Route path="top-rated/:id" element={<MovieOverview />} />
           </Route>
         </Routes>

@@ -44,7 +44,7 @@ function UserConfig() {
 
   return (
     <div
-      className={`transition-all overflow-auto ${rightSideStatus ? 'p-4 w-[23vw] ml-4 border-l' : 'fixed right-full'}`}
+      className={`transition-all overflow-auto ${rightSideStatus ? 'p-4 w-[28vw] ml-4 border-l h-[100vh]' : 'fixed right-full'}`}
       dir="rtl">
       <div className="h-[100px] flex items-center justify-around cursor-pointer gap-2 w-full">
         <MdKeyboardArrowDown size={24} />
