@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable import/no-unresolved */
 import { AiOutlinePlus } from 'react-icons/ai'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -51,20 +52,24 @@ function Recommendations() {
       </SwiperSlide>
     ))
   return (
-    <div className="my-8 w-full">
-      <SectionTitle title="Recommendations movies" hasAllPage={false} />
-      <div className="flex w-full overflow-x-auto overflow-y-hidden gap-4">
-        <Swiper
-          slidesPerView="auto"
-          spaceBetween={5}
-          freeMode
-          centeredSlides
-          centeredSlidesBounds
-          modules={[FreeMode]}>
-          {Movies}
-        </Swiper>
-      </div>
-    </div>
+    <>
+      {data?.total_pages ? (
+        <div className="my-8 w-full">
+          <SectionTitle title="Recommendations movies" hasAllPage={false} />
+          <div className="flex w-full overflow-x-auto overflow-y-hidden gap-4">
+            <Swiper
+              slidesPerView="auto"
+              spaceBetween={5}
+              freeMode
+              centeredSlides
+              centeredSlidesBounds
+              modules={[FreeMode]}>
+              {Movies}
+            </Swiper>
+          </div>
+        </div>
+      ) : null}
+    </>
   )
 }
 

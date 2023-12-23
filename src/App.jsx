@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom'
 import Discover from './pages/Discover'
 import Topbar from './components/Topbar'
 import MainLayout from './Layouts/RootLayout'
-import OverviewLayout from './Layouts/OverviewLayout'
 import MovieOverview from './pages/MovieOverview'
 import PopularMovies from './pages/PopularMovies'
 
@@ -17,7 +16,7 @@ const App = () => {
             <Route path="/" element={<Discover />} />
             <Route path="popular-movies" element={<PopularMovies />} />
           </Route>
-          <Route path="/overview" element={<OverviewLayout />}>
+          <Route path="/overview" element={<MainLayout />}>
             <Route index element={<MovieOverview />} />
             <Route path="popular-movies/:id" element={<MovieOverview />} />
             <Route path=":id" element={<MovieOverview />} />

@@ -1,5 +1,4 @@
 /* eslint-disable import/no-unresolved */
-import { AiOutlinePlus } from 'react-icons/ai'
 import { Autoplay, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useRef } from 'react'
@@ -13,13 +12,6 @@ function HeroHeader() {
   const { data: TrendMovies } = useGetTrendMoviesQuery('day')
   console.log(TrendMovies)
 
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<span class="${className}">${index + 1}</span>`
-    },
-  }
-
   const progressCircle = useRef(null)
   const progressContent = useRef(null)
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -29,7 +21,7 @@ function HeroHeader() {
   const MoviesSlider = TrendMovies?.results?.map((movie) => (
     <SwiperSlide
       key={movie.id}
-      className="h-screen relative w-full after:w-screen after:h-4/5 after:absolute after:z-20 after:bottom-0 after:bg-gradient-to-t after:from-black after:via-transparent after:block before:w-screen before:h-4/5 before:absolute before:z-20 before:top-0 before:bg-gradient-to-b before:from-black before:via-transparent before:block">
+      className="h-screen relative w-full after:w-screen after:h-4/5 after:absolute after:z-20 after:bottom-0 after:-left-11 after:bg-gradient-to-t after:from-black after:via-transparent after:block before:w-screen before:h-4/5 before:absolute before:z-20 before:top-0 before:-left-11 before:bg-gradient-to-b before:from-black before:via-transparent before:block">
       <img
         src={`https://image.tmdb.org/t/p/w1280${movie?.backdrop_path}`}
         className="w-full h-screen object-cover absolute left-0 top-0"
@@ -67,7 +59,6 @@ function HeroHeader() {
           delay: 5000,
           disableOnInteraction: false,
         }}
-        pagination={pagination}
         modules={[Autoplay, Pagination]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
         className="mySwiper w-full h-screen">

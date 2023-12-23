@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BsBell, BsGrid } from 'react-icons/bs'
 import { BiSearchAlt2 } from 'react-icons/bi'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { TopBarLinks } from '../assets/constant'
 import { RIGHT_SIDE_TOGGLE } from '../redux/themeSlices'
 
 function Topbar() {
+  const { rightSideStatus } = useSelector((state) => state.themeSlice)
   const [sticky, setSticky] = useState(false)
   const dispatch = useDispatch()
   const handleToggleUserConfig = () => {
@@ -33,9 +34,9 @@ function Topbar() {
   ))
   return (
     <div
-      className={`flex items-center justify-between w-[95vw] h-[100px] px-4 fixed left-[5vw] top-0 z-50 ${
-        sticky ? 'bg-black' : 'bg-transparent'
-      }`}>
+      className={`transition-all duration-500 flex items-center justify-between h-[100px] px-4 fixed left-[5vw] top-0 z-50 ${
+        rightSideStatus ? 'w-[71vw]' : 'w-[95vw]'
+      } ${sticky ? 'bg-black' : 'bg-transparent'}`}>
       <div className="flex items-center justify-between">{TopbarLinks}</div>
       <div className="flex items-center gap-2 cursor-pointer">
         <BiSearchAlt2 size={28} color="white" />
