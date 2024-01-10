@@ -10,7 +10,6 @@ import 'swiper/css/pagination'
 
 function HeroHeader() {
   const { data: TrendMovies } = useGetTrendMoviesQuery('day')
-  console.log(TrendMovies)
 
   const progressCircle = useRef(null)
   const progressContent = useRef(null)

@@ -22,7 +22,7 @@ function PaginatedItems({
   handlePageClick,
 }) {
   return (
-    <div className="mt-8 flex items-center w-full justify-center">
+    <div className="mt-8 flex items-center w-full justify-center mb-8">
       <MdNavigateBefore
         className={`w-12 h-12 rounded-lg p-2 ${
           currentPage === 1

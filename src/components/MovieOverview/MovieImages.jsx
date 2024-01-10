@@ -7,8 +7,8 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import Lightbox from 'yet-another-react-lightbox'
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
-import SectionTitle from './SectionTitle'
-import { useGetMovieImagesQuery } from '../redux/services/ApiCall'
+import SectionTitle from '../SectionTitle'
+import { useGetMovieImagesQuery } from '../../redux/services/ApiCall'
 import 'yet-another-react-lightbox/styles.css'
 import 'yet-another-react-lightbox/plugins/thumbnails.css'
 
@@ -42,8 +42,6 @@ function MovieImages() {
     width: 800,
     height: 600,
   }))
-
-  console.log(GallerySlide)
 
   return (
     <div className="my-4">

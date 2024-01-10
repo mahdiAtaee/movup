@@ -1,10 +1,11 @@
 /* eslint-disable arrow-body-style */
 import { Route, Routes } from 'react-router-dom'
-import Discover from './pages/Discover'
+import Home from './pages/Home'
 import Topbar from './components/Topbar'
 import MainLayout from './Layouts/RootLayout'
 import MovieOverview from './pages/MovieOverview'
 import PopularMovies from './pages/PopularMovies'
+import Discover from './pages/Discover'
 
 const App = () => {
   return (
@@ -13,8 +14,11 @@ const App = () => {
       <div className="flex">
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route path="/" element={<Discover />} />
+            <Route path="/" element={<Home />} />
             <Route path="popular-movies" element={<PopularMovies />} />
+          </Route>
+          <Route path="/discover" element={<MainLayout />}>
+            <Route index element={<Discover />} />
           </Route>
           <Route path="/overview" element={<MainLayout />}>
             <Route index element={<MovieOverview />} />

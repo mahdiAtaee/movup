@@ -28,10 +28,11 @@ export const api = createApi({
       }),
     }),
     getPopularMovies: builder.query({
-      query: (page) => ({
+      query: ({ page, language }) => ({
         url: 'movie/popular',
         params: {
           page,
+          language,
         },
       }),
     }),
@@ -101,6 +102,19 @@ export const api = createApi({
         url: `trending/all/${timeWindow}`,
       }),
     }),
+    getLanguagesSupport: builder.query({
+      query: () => ({
+        url: 'configuration/languages',
+      }),
+    }),
+    getDiscoverMovies: builder.query({
+      query: (options) => ({
+        url: 'discover/movie',
+        params: {
+          ...options,
+        },
+      }),
+    }),
   }),
 })
 
@@ -119,4 +133,6 @@ export const {
   useGetMovieRecommendationsQuery,
   useGetMovieVideosQuery,
   useGetTrendMoviesQuery,
+  useGetLanguagesSupportQuery,
+  useGetDiscoverMoviesQuery,
 } = api

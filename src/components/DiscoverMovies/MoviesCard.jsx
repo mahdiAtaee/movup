@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
-import IMDB from '../assets/imdb.png'
+import IMDB from '../../assets/imdb.png'
 
 function MoviesCard({ movie }) {
   return (
     <Link to={`/overview/popular-movies/${movie?.id}`}>
       <div className="relative h-[400px] rounded-full">
-        <div className="absolute top-0 right-0 left-0 bottom-0 w-full h-full bg-black opacity-30" />
+        <div className="absolute top-0 right-0 left-0 bottom-0 w-full h-full bg-black opacity-30 rounded-lg" />
         <img
           src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
           alt={movie.title}

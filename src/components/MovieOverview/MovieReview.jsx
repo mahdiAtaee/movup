@@ -1,8 +1,8 @@
 import { FaUserCircle } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import ReactStars from 'react-rating-stars-component'
-import { useGetMovieReviewsQuery } from '../redux/services/ApiCall'
-import SectionTitle from './SectionTitle'
+import { useGetMovieReviewsQuery } from '../../redux/services/ApiCall'
+import SectionTitle from '../SectionTitle'
 
 function MovieReview() {
   const { id } = useParams()

@@ -1,18 +1,19 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable import/no-unresolved */
 import { AiOutlinePlus } from 'react-icons/ai'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'
 import { Link, useParams } from 'react-router-dom'
-import IMDB from '../assets/imdb.png'
-import { useGetMovieSimilarQuery } from '../redux/services/ApiCall'
+import IMDB from '../../assets/imdb.png'
+import { useGetMovieRecommendationsQuery } from '../../redux/services/ApiCall'
 import 'swiper/css'
 import 'swiper/css/free-mode'
-import SectionTitle from './SectionTitle'
+import SectionTitle from '../SectionTitle'
 
-function SimilarMovies() {
+function Recommendations() {
   const { id } = useParams()
-  const { data } = useGetMovieSimilarQuery(id)
-  console.log(data)
+  const { data } = useGetMovieRecommendationsQuery(id)
+
   const Movies = data?.results
     ?.filter((movie) => movie.backdrop_path)
     .slice(0, 5)
@@ -51,21 +52,25 @@ function SimilarMovies() {
       </SwiperSlide>
     ))
   return (
-    <div className="my-8 w-full">
-      <SectionTitle title="Similar movies" hasAllPage={false} />
-      <div className="flex w-full overflow-x-auto overflow-y-hidden gap-4">
-        <Swiper
-          slidesPerView="auto"
-          spaceBetween={5}
-          freeMode
-          centeredSlides
-          centeredSlidesBounds
-          modules={[FreeMode]}>
-          {Movies}
-        </Swiper>
-      </div>
-    </div>
+    <>
+      {data?.total_pages ? (
+        <div className="my-8 w-full">
+          <SectionTitle title="Recommendations movies" hasAllPage={false} />
+          <div className="flex w-full overflow-x-auto overflow-y-hidden gap-4">
+            <Swiper
+              slidesPerView="auto"
+              spaceBetween={5}
+              freeMode
+              centeredSlides
+              centeredSlidesBounds
+              modules={[FreeMode]}>
+              {Movies}
+            </Swiper>
+          </div>
+        </div>
+      ) : null}
+    </>
   )
 }
 
-export default SimilarMovies
+export default Recommendations

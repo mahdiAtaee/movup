@@ -4,7 +4,7 @@ import { AiOutlinePlus, AiFillStar } from 'react-icons/ai'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'
 import { Link } from 'react-router-dom'
-import { useGetTopRatedMoviesQuery } from '../redux/services/ApiCall'
+import { useGetTopRatedMoviesQuery } from '../../redux/services/ApiCall'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 

@@ -2,9 +2,9 @@
 import { AiFillStar } from 'react-icons/ai'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'
-import { useGetTopMoviesQuery, useGetTrailerMoviesQuery } from '../redux/services/ApiCall'
+import { useGetTopMoviesQuery, useGetTrailerMoviesQuery } from '../../redux/services/ApiCall'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 
@@ -18,7 +18,7 @@ function Trailers() {
     const trailer = tarilers?.results?.find((video) => video.type === 'Trailer')
     return trailer
   })
-  console.log(trailerMovies)
+
   const Movies = trailerMovies?.map((t) => (
     <iframe
       src={`https://www.youtube.com/embed/${t?.key}`}

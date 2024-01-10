@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom'
-import { Loading, MovieDetail, MovieDetailHeader } from '../components'
+import { Loading } from '../components'
+import MovieDetailHeader from '../components/MovieOverview/MovieDetailHeader'
+import MovieDetail from '../components/MovieOverview/MovieDetail'
 import { useGetMovieCreditsQuery, useGetMoviesDetailQuery } from '../redux/services/ApiCall'
 
 function MovieOverview() {

@@ -115,3 +115,20 @@
   stroke-dasharray: 125.6;
   transform: rotate(-90deg);
 }
+
+.select-search-container {
+  width: 100% !important;
+}
+
+.select-search-container:not(.select-search-is-multiple) .select-search-select {
+  top: 100% !important;
+}
+
+.rmdp-container {
+  width: 100% !important;
+}
+
+.rmdp-input {
+  width: 100% !important;
+  height: 40px !important;
+}

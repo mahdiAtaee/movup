@@ -5,7 +5,7 @@ import { CircularProgressBar } from '@tomickigrzegorz/react-circular-progress-ba
 
 function MovieDetail({ movie }) {
   const genres = movie?.genres?.map((genre) => (
-    <span className="border-2 border-white text-white p-2 rounded-full mr-1 cursor-pointer">
+    <span className="border-2 border-white text-white p-2 rounded-full mr-1 cursor-pointer" key={genre.key}>
       {genre?.name}
     </span>
   ))

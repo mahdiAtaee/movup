@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { useGetMovieGenresQuery } from '../redux/services/ApiCall'
 import Avatar from '../assets/avatar2.jpg'
 import SearchMovies from './SearchMovies'
+import Filter from './PopularMovies/Filter'
 
 function UserConfig() {
   const { rightSideStatus } = useSelector((state) => state.themeSlice)
@@ -44,7 +45,9 @@ function UserConfig() {
 
   return (
     <div
-      className={`transition-all duration-400 overflow-auto bg-white fixed right-0 z-50 ${rightSideStatus ? 'p-4 w-[24vw] ml-4 border-l h-[100vh]' : 'fixed left-full'}`}
+      className={`transition-all duration-400 overflow-auto bg-white fixed right-0 z-50 ${
+        rightSideStatus ? 'p-4 w-[24vw] ml-4 border-l h-[100vh]' : 'fixed left-full'
+      }`}
       dir="rtl">
       <div className="h-[100px] flex items-center justify-around cursor-pointer gap-2 w-full">
         <MdKeyboardArrowDown size={24} />
@@ -67,6 +70,7 @@ function UserConfig() {
         </li>
         <ul className="flex flex-wrap gap-x-4">{genres}</ul>
       </ul>
+      <Filter />
     </div>
   )
 }

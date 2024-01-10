@@ -3,14 +3,14 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'
 import { Link } from 'react-router-dom'
-import IMDB from '../assets/imdb.png'
-import { useGetPopularMoviesQuery } from '../redux/services/ApiCall'
+import IMDB from '../../assets/imdb.png'
+import { useGetPopularMoviesQuery } from '../../redux/services/ApiCall'
 import 'swiper/css'
 import 'swiper/css/free-mode'
-import SectionTitle from './SectionTitle'
+import SectionTitle from '../SectionTitle'
 
 function PopularMovies() {
-  const { data } = useGetPopularMoviesQuery()
+  const { data } = useGetPopularMoviesQuery({ page: 1 })
 
   const Movies = data?.results?.slice(0, 5).map((movie) => (
     <SwiperSlide

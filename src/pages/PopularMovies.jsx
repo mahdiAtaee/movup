@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import MoviesCard from '../components/MoviesCard'
+import MoviesCard from '../components/DiscoverMovies/MoviesCard'
 import PaginatedItems from '../components/Pagination'
 import { useGetPopularMoviesQuery } from '../redux/services/ApiCall'
 import { Loading } from '../components'
+import HeroHeader from '../components/HeroHeader'
 
 function PopularMovies() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -34,7 +35,13 @@ function PopularMovies() {
       {isFetching ? (
         <Loading />
       ) : (
-        <div className="grid grid-cols-3 gap-4 rounded-full cursor-pointer">{Movies}</div>
+        <div className=" w-[91vw] ml-24 mt-[100px] flex gap-4">
+          <div>
+            <HeroHeader />
+          </div>
+          <div className="grid grid-cols-3 gap-4 rounded-full cursor-pointer w-full">{Movies}</div>
+          {/* <Filter className="w-[20vw]" /> */}
+        </div>
       )}
       <PaginatedItems
         currentPage={movies?.page}

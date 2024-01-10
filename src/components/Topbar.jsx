@@ -36,7 +36,7 @@ function Topbar() {
     <div
       className={`transition-all duration-500 flex items-center justify-between h-[100px] px-4 fixed left-[5vw] top-0 z-50 ${
         rightSideStatus ? 'w-[71vw]' : 'w-[95vw]'
-      } ${sticky ? 'bg-black' : 'bg-transparent'}`}>
+      } ${sticky ? 'bg-black' : 'bg-black'}`}>
       <div className="flex items-center justify-between">{TopbarLinks}</div>
       <div className="flex items-center gap-2 cursor-pointer">
         <BiSearchAlt2 size={28} color="white" />
