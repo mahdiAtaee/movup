@@ -37,8 +37,12 @@ export const api = createApi({
       }),
     }),
     getTopRatedMovies: builder.query({
-      query: () => ({
+      query: ({ page = 1, language = 'en-us' }) => ({
         url: 'movie/top_rated',
+        params: {
+          page,
+          language,
+        },
       }),
     }),
     getNewTrailerMovies: builder.query({
@@ -115,6 +119,15 @@ export const api = createApi({
         },
       }),
     }),
+    getUpCommingMovies: builder.query({
+      query: ({ page, language }) => ({
+        url: 'movie/upcoming',
+        params: {
+          page,
+          language,
+        },
+      }),
+    }),
   }),
 })
 
@@ -135,4 +148,5 @@ export const {
   useGetTrendMoviesQuery,
   useGetLanguagesSupportQuery,
   useGetDiscoverMoviesQuery,
+  useGetUpCommingMoviesQuery,
 } = api

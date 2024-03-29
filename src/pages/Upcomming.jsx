@@ -1,15 +1,14 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import MoviesCard from '../components/DiscoverMovies/MoviesCard'
 import PaginatedItems from '../components/Pagination'
-import { useGetPopularMoviesQuery } from '../redux/services/ApiCall'
+import { useGetUpCommingMoviesQuery } from '../redux/services/ApiCall'
 import { Loading } from '../components'
-import HeroHeader from '../components/HeroHeader'
 
-function PopularMovies() {
+function Upcomming() {
   const [currentPage, setCurrentPage] = useState(1)
-  const { language } = useParams((state) => state.FilterSlice)
-  const { data: movies, isFetching } = useGetPopularMoviesQuery({
+  const { language } = useSelector((state) => state.FilterSlice)
+  const { data: movies, isFetching } = useGetUpCommingMoviesQuery({
     page: Number(currentPage),
     language,
   })
@@ -17,7 +16,7 @@ function PopularMovies() {
 
   const handleNextPageClick = (e, Page, totalPages) => {
     if (Page <= totalPages) {
-      setCurrentPage((beforePage) => beforePage + 1)
+      setCurrentPage(currentPage + 1)
     } else {
       e.preventDefault()
     }
@@ -41,11 +40,7 @@ function PopularMovies() {
         <Loading />
       ) : (
         <div className=" w-[91vw] ml-24 mt-[120px] flex gap-4">
-          <div>
-            <HeroHeader />
-          </div>
           <div className="grid grid-cols-3 gap-4 rounded-full cursor-pointer w-full">{Movies}</div>
-          {/* <Filter className="w-[20vw]" /> */}
         </div>
       )}
       <PaginatedItems
@@ -59,4 +54,4 @@ function PopularMovies() {
   )
 }
 
-export default PopularMovies
+export default Upcomming

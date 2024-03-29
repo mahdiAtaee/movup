@@ -9,8 +9,7 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 
 function TopRatedMovies() {
-  const { data } = useGetTopRatedMoviesQuery()
-
+  const { data } = useGetTopRatedMoviesQuery({ page: 1, language: 'en-us' })
   const Movies = data?.results?.slice(0, 10).map((movie) => (
     <SwiperSlide
       key={movie.id}
@@ -54,7 +53,7 @@ function TopRatedMovies() {
           Top Rated
           <AiFillStar color="#daa520" />
         </h2>
-        <Link to="/popular-movies" className="flex items-center gap-2 text-gray-500">
+        <Link to="/top-rated" className="flex items-center gap-2 text-gray-500">
           See All
           <MdKeyboardArrowRight size={24} />
         </Link>

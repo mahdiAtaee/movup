@@ -1,14 +1,31 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-lone-blocks */
-import { FaPlay } from 'react-icons/fa'
+import { FaPlay, FaBookmark } from 'react-icons/fa'
+import { RiPlayListAddFill } from 'react-icons/ri'
+import { MdFavorite, MdStarRate } from 'react-icons/md'
 import { CircularProgressBar } from '@tomickigrzegorz/react-circular-progress-bar'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { addMovieToPlayList, getWatchList } from '../../services/FetchData'
 
 function MovieDetail({ movie }) {
+  const { id: movieID } = useParams()
+  const dispatch = useDispatch()
+  const accountDetail = useSelector((state) => state?.accountSlice)
   const genres = movie?.genres?.map((genre) => (
-    <span className="border-2 border-white text-white p-2 rounded-full mr-1 cursor-pointer" key={genre.key}>
+    <span
+      className="border-2 border-white text-white p-2 rounded-full mr-1 cursor-pointer"
+      key={genre.key}>
       {genre?.name}
     </span>
   ))
+
+  const handleAddMovieToPlayList = async () => {
+    const accountID = accountDetail?.account_id
+    const sessionID = accountDetail?.session?.session_id
+    const result = await addMovieToPlayList(accountID, sessionID, Number(354956))
+    console.log(result)
+  }
 
   const MOVIE_RUN_TIME = (Number(movie?.runtime) / 60).toFixed(2).toString().split('.')
   return (
@@ -38,10 +55,33 @@ function MovieDetail({ movie }) {
           <p className="text-xl text-white font-primary my-4">
             Running Time: {`${MOVIE_RUN_TIME[0]}h ${MOVIE_RUN_TIME[1]}min`}
           </p>
-          <a href="/" className="my-4 text-white font-primary text-xl flex items-center gap-2">
-            Trailer
-            <FaPlay />
-          </a>
+          <div className="flex items-center gap-4 my-4">
+            <a
+              href="/"
+              className="text-black flex items-center justify-center text-xl cursor-pointer  w-12 h-12 border-1 border-black bg-gray-200 rounded-full">
+              <FaPlay />
+            </a>
+            <span
+              className="text-black flex items-center justify-center text-xl cursor-pointer  w-12 h-12 border-1 border-black bg-gray-200 rounded-full"
+              onClick={() => handleAddMovieToPlayList()}>
+              <RiPlayListAddFill />
+            </span>
+            <span
+              className="text-black flex items-center justify-center text-xl cursor-pointer  w-12 h-12 border-1 border-black bg-gray-200 rounded-full"
+              onClick={() => {
+                const accountID = accountDetail?.account_id
+                const sessionID = accountDetail?.session?.session_id
+                getWatchList(accountID, sessionID)
+              }}>
+              <MdFavorite />
+            </span>
+            <span className="text-black flex items-yarn devcenter justify-center text-xl cursor-pointer  w-12 h-12 border-1 border-black bg-gray-200 rounded-full">
+              <FaBookmark />
+            </span>
+            <span className="text-black flex items-center justify-center text-xl cursor-pointer  w-12 h-12 border-1 border-black bg-gray-200 rounded-full">
+              <MdStarRate />
+            </span>
+          </div>
           <div className="flex items-center gap-2">
             <div className="rounded-full w-[130px] h-[130px] border-2 border-white relative cursor-pointer bg-black flex items-center justify-center">
               <CircularProgressBar

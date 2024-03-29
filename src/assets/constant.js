@@ -1,18 +1,15 @@
 import { AiOutlineHome, AiOutlineCompass, AiOutlineStar } from 'react-icons/ai'
-import { BsAlarm, BsPeople, BsBookmark } from 'react-icons/bs'
-import { BiTimeFive } from 'react-icons/bi'
+import { BsAlarm, BsBookmark } from 'react-icons/bs'
 
 export const MenuLinks = [
   { name: 'Home', to: '/', icon: AiOutlineHome },
   { name: 'Discover', to: '/discover', icon: AiOutlineCompass },
-  { name: 'Comming Soon', to: '/comming-soon', icon: BsAlarm },
-  { name: 'Community', to: '/community', icon: BsPeople },
+  { name: 'Up Comming', to: '/upcomming', icon: BsAlarm },
+  { name: 'Top Rated', to: '/top-rated', icon: AiOutlineStar },
 ]
 
 export const LibraryLinks = [
-  { name: 'Recent', to: '/recent', icon: BiTimeFive },
   { name: 'Bookmark', to: '/Bookmark', icon: BsBookmark },
-  { name: 'Top Rated', to: '/top-rated', icon: AiOutlineStar },
 ]
 
 export const TopBarLinks = [

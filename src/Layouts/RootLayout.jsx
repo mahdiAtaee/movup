@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom'
-import { Sidebar, UserConfig } from '../components'
+import { Sidebar, UserConfig, Topbar } from '../components'
 
 function RootLayout() {
   return (
     <>
+      <Topbar />
       <Sidebar />
       <main>
         <Outlet />
