@@ -1,7 +1,6 @@
 /* eslint-disable arrow-body-style */
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
-import Topbar from './components/Topbar'
 import MainLayout from './Layouts/RootLayout'
 import AuthLayout from './Layouts/AuthLayout'
 import MovieOverview from './pages/MovieOverview'
@@ -11,6 +10,7 @@ import Upcomming from './pages/Upcomming'
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 import TopRated from './pages/TopRated'
+import Watchlist from './pages/Watchlist'
 
 const App = () => {
   return (
@@ -29,6 +29,9 @@ const App = () => {
           </Route>
           <Route path="/top-rated" element={<MainLayout />}>
             <Route index element={<TopRated />} />
+          </Route>
+          <Route path="/bookmark" element={<MainLayout />}>
+            <Route index element={<Watchlist />} />
           </Route>
           <Route path="/overview" element={<MainLayout />}>
             <Route index element={<MovieOverview />} />

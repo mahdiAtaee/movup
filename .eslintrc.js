@@ -46,6 +46,7 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 0,
     'react/jsx-closing-bracket-location': [0, 'props-aligned'],
     'react/no-array-index-key': 0,
+    'no-unused-vars': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {

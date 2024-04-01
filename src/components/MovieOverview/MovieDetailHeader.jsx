@@ -6,9 +6,11 @@ import { MdFavorite, MdStarRate } from 'react-icons/md'
 import { CircularProgressBar } from '@tomickigrzegorz/react-circular-progress-bar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { useAlert } from 'react-alert'
 import { addMovieToPlayList, getWatchList } from '../../services/FetchData'
 
 function MovieDetail({ movie }) {
+  const alert = useAlert()
   const { id: movieID } = useParams()
   const dispatch = useDispatch()
   const accountDetail = useSelector((state) => state?.accountSlice)
@@ -23,8 +25,13 @@ function MovieDetail({ movie }) {
   const handleAddMovieToPlayList = async () => {
     const accountID = accountDetail?.account_id
     const sessionID = accountDetail?.session?.session_id
-    const result = await addMovieToPlayList(accountID, sessionID, Number(354956))
+    const result = await addMovieToPlayList(accountID, sessionID, Number(movieID))
     console.log(result)
+    if (result === undefined) {
+      alert.error('There was a problem adding the movie to the watch list!')
+    } else {
+      alert.success('added movie to watchlist successfully!')
+    }
   }
 
   const MOVIE_RUN_TIME = (Number(movie?.runtime) / 60).toFixed(2).toString().split('.')

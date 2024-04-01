@@ -68,11 +68,9 @@ export const addMovieToPlayList = async (accountId, sessionID, movieId) => {
     const response = await axios.post(
       `https://api.themoviedb.org/3/account/${accountId}/watchlist?api_key=3c49fc63dd17bdb4ba0e9558e6984eaa&session_id=${sessionID}`,
       {
-        data: {
-          media_type: 'movie',
-          media_id: movieId,
-          watchlist: true,
-        },
+        media_type: 'movie',
+        media_id: movieId,
+        watchlist: true,
       },
     )
     return response
@@ -84,7 +82,7 @@ export const addMovieToPlayList = async (accountId, sessionID, movieId) => {
 export const getWatchList = async (accountId, sessionID) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/account/${accountId}/lists?api_key=3c49fc63dd17bdb4ba0e9558e6984eaa&session_id=${sessionID}`,
+      `https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?api_key=3c49fc63dd17bdb4ba0e9558e6984eaa&session_id=${sessionID}`,
     )
     return response
   } catch (error) {
