@@ -5,6 +5,7 @@ const initialState = {
   certification: '',
   language: 'en-US',
   with_keywords: '',
+  with_genres: '',
   'vote_average.lte': 10,
   'vote_average.gte': 6,
   'with_runtime.gte': 120,
@@ -12,6 +13,7 @@ const initialState = {
   'release_date.gte': '',
   'release_date.lte': '',
 }
+const genres = []
 
 const filterSlice = createSlice({
   name: 'filter',
@@ -49,6 +51,26 @@ const filterSlice = createSlice({
       ...state,
       with_keywords: encodeURIComponent(action.payload),
     }),
+    ADD_GENRE_VALUE: (state, action) => {
+      const index = genres.indexOf(action.payload)
+      if (index === -1) {
+        genres.push(action.payload)
+      }
+      const finalGenres = genres.toString()
+      return {
+        ...state,
+        with_genres: finalGenres,
+      }
+    },
+    DELETE_GENRE_VALUE: (state, action) => {
+      const index = genres.indexOf(action.payload)
+      genres.splice(index, 1)
+      const finalGenres = genres.toString()
+      return {
+        ...state,
+        with_genres: finalGenres,
+      }
+    },
   },
 })
 
@@ -60,5 +82,7 @@ export const {
   CHANGE_RUNTIME_VALUE,
   CHANGE_RELEASE_DATE_VALUE,
   CHANGE_KEYWORD_VALUE,
+  ADD_GENRE_VALUE,
+  DELETE_GENRE_VALUE,
 } = filterSlice.actions
 export default filterSlice.reducer

@@ -5,15 +5,28 @@ import { RiPlayListAddFill } from 'react-icons/ri'
 import { MdFavorite, MdStarRate } from 'react-icons/md'
 import { CircularProgressBar } from '@tomickigrzegorz/react-circular-progress-bar'
 import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Tooltip } from 'react-tooltip'
 import { useAlert } from 'react-alert'
-import { addMovieToPlayList, getWatchList } from '../../services/FetchData'
+import ReactStars from 'react-rating-stars-component'
+import { addMovieToPlayList, addRatingMovie, getWatchList } from '../../services/FetchData'
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeading,
+  PopoverClose,
+} from '../Popover.tsx'
 
 function MovieDetail({ movie }) {
   const alert = useAlert()
   const { id: movieID } = useParams()
   const dispatch = useDispatch()
   const accountDetail = useSelector((state) => state?.accountSlice)
+  const accountID = accountDetail?.account_id
+  const sessionID = accountDetail?.session?.session_id
   const genres = movie?.genres?.map((genre) => (
     <span
       className="border-2 border-white text-white p-2 rounded-full mr-1 cursor-pointer"
@@ -23,14 +36,33 @@ function MovieDetail({ movie }) {
   ))
 
   const handleAddMovieToPlayList = async () => {
-    const accountID = accountDetail?.account_id
-    const sessionID = accountDetail?.session?.session_id
     const result = await addMovieToPlayList(accountID, sessionID, Number(movieID))
     console.log(result)
     if (result === undefined) {
       alert.error('There was a problem adding the movie to the watch list!')
     } else {
       alert.success('added movie to watchlist successfully!')
+    }
+  }
+
+  const handleAddMovieToFavorates = async () => {
+    const result = await addMovieToPlayList(accountID, sessionID, Number(movieID))
+    console.log(result)
+    if (result === undefined) {
+      alert.error('There was a problem adding the movie to the Favorate Movies!')
+    } else {
+      alert.success('added movie to Favorates successfully!')
+    }
+  }
+
+  const ratingChanged = async (rate) => {
+    console.log(rate)
+    const result = await addRatingMovie(movieID, sessionID, Number(rate * 2))
+    console.log(result)
+    if (result === undefined) {
+      alert.error('There was a problem rating to movie!')
+    } else {
+      alert.success('rating to movie successfully!')
     }
   }
 
@@ -75,18 +107,31 @@ function MovieDetail({ movie }) {
             </span>
             <span
               className="text-black flex items-center justify-center text-xl cursor-pointer  w-12 h-12 border-1 border-black bg-gray-200 rounded-full"
-              onClick={() => {
-                const accountID = accountDetail?.account_id
-                const sessionID = accountDetail?.session?.session_id
-                getWatchList(accountID, sessionID)
-              }}>
+              onClick={() => handleAddMovieToFavorates()}>
               <MdFavorite />
             </span>
-            <span className="text-black flex items-yarn devcenter justify-center text-xl cursor-pointer  w-12 h-12 border-1 border-black bg-gray-200 rounded-full">
-              <FaBookmark />
-            </span>
             <span className="text-black flex items-center justify-center text-xl cursor-pointer  w-12 h-12 border-1 border-black bg-gray-200 rounded-full">
-              <MdStarRate />
+              <Popover>
+                <PopoverTrigger>
+                  <MdStarRate data-tooltip-id="my-tooltip-click" />
+                </PopoverTrigger>
+                <PopoverContent className="Popover bg-white z-50 relative p-4 rounded-md">
+                  <PopoverClose className="absolute top-4 right-4">
+                    <button type="button">X</button>
+                  </PopoverClose>
+                  <PopoverHeading>Rating to Movie</PopoverHeading>
+                  <PopoverDescription>
+                    <ReactStars
+                      count={5}
+                      size={46}
+                      onChange={ratingChanged}
+                      activeColor="#ffd700"
+                      isHalf
+                      edit
+                    />
+                  </PopoverDescription>
+                </PopoverContent>
+              </Popover>
             </span>
           </div>
           <div className="flex items-center gap-2">

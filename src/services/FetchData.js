@@ -89,3 +89,55 @@ export const getWatchList = async (accountId, sessionID) => {
     console.error(error)
   }
 }
+
+export const addMovieToFavorate = async (accountId, sessionID, movieId) => {
+  try {
+    const response = await axios.post(
+      `https://api.themoviedb.org/3/account/${accountId}/favorite?api_key=3c49fc63dd17bdb4ba0e9558e6984eaa&session_id=${sessionID}`,
+      {
+        media_type: 'movie',
+        media_id: movieId,
+        favorate: true,
+      },
+    )
+    return response
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const getFavorateMovies = async (accountId, sessionID) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/account/${accountId}/favorite/movies?api_key=3c49fc63dd17bdb4ba0e9558e6984eaa&session_id=${sessionID}`,
+    )
+    return response
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const addRatingMovie = async (movieID, sessionID, rate) => {
+  try {
+    const response = await axios.post(
+      `https://api.themoviedb.org/3/movie/${movieID}/rating?api_key=3c49fc63dd17bdb4ba0e9558e6984eaa&session_id=${sessionID}`,
+      {
+        value: rate,
+      },
+    )
+    return response
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const Searching = async (keyword, type = 'movie', page = 1) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/search/${type}?query=${keyword}&page=${page}&api_key=3c49fc63dd17bdb4ba0e9558e6984eaa`,
+    )
+    return response
+  } catch (error) {
+    console.error(error)
+  }
+}

@@ -1,25 +1,31 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, redirect } from 'react-router-dom'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useGetMovieGenresQuery } from '../redux/services/ApiCall'
 import Avatar from '../assets/avatar2.jpg'
 import SearchMovies from './SearchMovies'
 import Filter from './PopularMovies/Filter'
+import { ADD_GENRE_VALUE, DELETE_GENRE_VALUE } from '../redux/FilterSlice'
 
 function UserConfig() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { rightSideStatus } = useSelector((state) => state.themeSlice)
   const [genresSelect, setGenresSelect] = useState([])
   const { data } = useGetMovieGenresQuery()
+  console.log(data)
   const handleClickGenre = (genre) =>
     // eslint-disable-next-line implicit-arrow-linebreak
     setGenresSelect((oldarray) => {
       const index = genresSelect.indexOf(genre.name)
       if (index === -1) {
+        dispatch({ type: ADD_GENRE_VALUE, payload: genre.id })
         return [...oldarray, genre.name]
       }
+      dispatch({ type: DELETE_GENRE_VALUE, payload: genre.id })
       return oldarray.filter((item) => item !== genre.name)
     })
 
@@ -42,6 +48,10 @@ function UserConfig() {
       </Link>
     </li>
   ))
+
+  const handleSearch = () => {
+    navigate('/AdvancedSearch')
+  }
 
   return (
     <div
@@ -71,6 +81,12 @@ function UserConfig() {
         <ul className="flex flex-wrap gap-x-4">{genres}</ul>
       </ul>
       <Filter />
+      <button
+        type="button"
+        onClick={() => handleSearch()}
+        className="py-2 px-4 flex justify-center items-center shadow-md w-[20vw] bg-red-500 mt-4 rounded-md text-2xl font-openSans text-white">
+        Search
+      </button>
     </div>
   )
 }

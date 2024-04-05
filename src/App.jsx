@@ -11,6 +11,8 @@ import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 import TopRated from './pages/TopRated'
 import Watchlist from './pages/Watchlist'
+import Search from './pages/Search'
+import AdvancedSearch from './pages/AdvancedSearch'
 
 const App = () => {
   return (
@@ -23,6 +25,12 @@ const App = () => {
           </Route>
           <Route path="/discover" element={<MainLayout />}>
             <Route index element={<Discover />} />
+          </Route>
+          <Route path="/search" element={<MainLayout />}>
+            <Route index element={<Search />} />
+          </Route>
+          <Route path="/AdvancedSearch" element={<MainLayout />}>
+            <Route index element={<AdvancedSearch />} />
           </Route>
           <Route path="/upcomming" element={<MainLayout />}>
             <Route index element={<Upcomming />} />
