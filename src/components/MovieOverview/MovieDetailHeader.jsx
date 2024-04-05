@@ -23,10 +23,11 @@ import {
 function MovieDetail({ movie }) {
   const alert = useAlert()
   const { id: movieID } = useParams()
-  const dispatch = useDispatch()
-  const accountDetail = useSelector((state) => state?.accountSlice)
-  const accountID = accountDetail?.account_id
-  const sessionID = accountDetail?.session?.session_id
+  // const accountDetail = useSelector((state) => state?.accountSlice)
+  // const accountID = accountDetail?.account_id
+  // const sessionID = accountDetail?.session?.session_id
+  const sessionID = sessionStorage.getItem('session')
+  const accountID = sessionStorage.getItem('account_id')
   const genres = movie?.genres?.map((genre) => (
     <span
       className="border-2 border-white text-white p-2 rounded-full mr-1 cursor-pointer"
@@ -37,7 +38,6 @@ function MovieDetail({ movie }) {
 
   const handleAddMovieToPlayList = async () => {
     const result = await addMovieToPlayList(accountID, sessionID, Number(movieID))
-    console.log(result)
     if (result === undefined) {
       alert.error('There was a problem adding the movie to the watch list!')
     } else {

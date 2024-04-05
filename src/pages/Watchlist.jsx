@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useAlert } from 'react-alert'
 import { Link } from 'react-router-dom'
 import MoviesCard from '../components/DiscoverMovies/MoviesCard'
 import PaginatedItems from '../components/Pagination'
@@ -8,12 +6,10 @@ import { getWatchList } from '../services/FetchData'
 import DIGITAL from '../assets/stage2.jpg'
 
 function Watchlist() {
-  const alert = useAlert()
-  const accountDetail = useSelector((state) => state?.accountSlice)
+  const sessionID = sessionStorage.getItem('session')
+  const accountID = sessionStorage.getItem('account_id')
   const [currentPage, setCurrentPage] = useState(1)
   const [watchlistMovies, setWatchlistMovies] = useState(null)
-  const accountID = accountDetail?.account_id
-  const sessionID = accountDetail?.session?.session_id
   const watchlist = getWatchList(accountID, sessionID).then(({ data }) => setWatchlistMovies(data))
   const Movies = watchlistMovies?.results?.map((movie) => (
     <MoviesCard key={movie?.id} movie={movie} />
@@ -71,7 +67,9 @@ function Watchlist() {
                 className="mt-28 text-center ml-auto border border-blue-600 h-12 rounded-md flex items-center justify-center hover:bg-blue-600 hover:border-white hover:text-white font-openSans transition duration-500">
                 Login In TMDB Account
               </Link>
-              <Link to="/" className="mt-2 block hover:text-blue-400">Home Page</Link>
+              <Link to="/" className="mt-2 block hover:text-blue-400">
+                Home Page
+              </Link>
             </div>
           </div>
         </>

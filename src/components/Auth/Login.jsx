@@ -14,14 +14,16 @@ function Login() {
 
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
-    const session = createNewSession(requestToken).then((data) => dispatch({ type: SAVE_SESSION, payload: data.data }))
+    const session = createNewSession(requestToken).then(({ data }) => {
+      sessionStorage.setItem('session', data?.session_id)
+      dispatch({ type: SAVE_SESSION, payload: data })
+      getAccountDetails(data?.session_id).then((aid) => sessionStorage.setItem('account_id', aid?.data?.id))
+    })
   }, [])
 
   const handleSubmit = async () => {
-    console.log(accountSession)
     const result = await getAccountDetails(accountSession?.session?.session_id)
     dispatch({ type: SAVE_ACCOUNT_ID, payload: result?.data?.id })
-    console.log(result)
   }
 
   return (
@@ -34,28 +36,6 @@ function Login() {
               login to browse in million movies
             </p>
           </div>
-          <div className="flex items-start flex-col my-2 w-full justify-center mx-auto">
-            <label htmlFor="email" className="text-white font-Catamaran text-xl py-2">
-              email
-            </label>
-            <input
-              type="text"
-              id="email"
-              className="w-2/4 h-[50px] rounded-sm p-4 outline-none text-lg font-primary"
-              placeholder="enter your email"
-            />
-          </div>
-          <div className="flex items-start flex-col my-2">
-            <label htmlFor="password" className="text-white font-Catamaran text-xl py-2">
-              password
-            </label>
-            <input
-              type="text"
-              id="password"
-              className="w-2/4 h-[50px] rounded-sm p-4 outline-none text-lg font-primary"
-              placeholder="enter your password"
-            />
-          </div>
           <input
             type="button"
             onClick={() => handleSubmit()}
@@ -63,7 +43,7 @@ function Login() {
             className="w-2/4 h-[50px] bg-blue-500 text-black cursor-pointer rounded-sm font-bold font-Catamaran text-2xl mt-6 hover:text-white transition-all"
           />
           <p className="text-white my-4">
-            Don&apos;t have an account{' '}
+            Don&apos;t have an session id?{' '}
             <Link to="/auth/register" className="text-purple-300 cursor-pointer">
               Sign Up
             </Link>
@@ -73,7 +53,6 @@ function Login() {
               Home
             </Link>
           </p>
-          <p className="text-purple-300 cursor-pointer">Forget Password?</p>
         </form>
       </div>
       <div className="poster-section w-1/2 h-full relative after:w-full after:h-full after:absolute after:top-0 after:left-0 after:bg-black after:opacity-40 before:w-40 before:h-full before:absolute before:-left-16 before:top-0 before:bg-black before:z-50 before:-skew-x-6">
