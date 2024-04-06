@@ -14,8 +14,5 @@ export const LibraryLinks = [
 
 export const TopBarLinks = [
   { name: 'Movies', to: '/movies' },
-  { name: 'Series', to: '/series' },
   { name: 'TV Show', to: '/tv-show' },
-  { name: 'Animations', to: '/animation' },
-  { name: 'plan', to: '/plan' },
 ]

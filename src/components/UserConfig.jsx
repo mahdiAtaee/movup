@@ -9,14 +9,18 @@ import Avatar from '../assets/avatar2.jpg'
 import SearchMovies from './SearchMovies'
 import Filter from './PopularMovies/Filter'
 import { ADD_GENRE_VALUE, DELETE_GENRE_VALUE } from '../redux/FilterSlice'
+import { getAccountDetails } from '../services/FetchData'
 
 function UserConfig() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [accountDetail, setAccountDetail] = useState()
   const { rightSideStatus } = useSelector((state) => state.themeSlice)
   const [genresSelect, setGenresSelect] = useState([])
   const { data } = useGetMovieGenresQuery()
-  console.log(data)
+  const sessionID = sessionStorage.getItem('session')
+  const result = getAccountDetails(sessionID).then((aid) => setAccountDetail(aid.data))
+
   const handleClickGenre = (genre) =>
     // eslint-disable-next-line implicit-arrow-linebreak
     setGenresSelect((oldarray) => {
@@ -62,12 +66,14 @@ function UserConfig() {
       <div className="h-[100px] flex items-center justify-around cursor-pointer gap-2 w-full">
         <MdKeyboardArrowDown size={24} />
         <div>
-          <span className="text-base block text-left">Mahdi ataee</span>
-          <span className="text-sm text-gray-500 text-left">mahdiataee1689@gmail.com</span>
+          <span className="text-base block text-left">
+            {accountDetail?.name === '' ? 'USER' : accountDetail?.name}
+          </span>
+          <span className="text-sm text-gray-500 text-left">{accountDetail?.username}</span>
         </div>
         <div>
           <img
-            src={Avatar}
+            src={`https://secure.gravatar.com/avatar/${accountDetail?.avatar?.gravatar?.hash}.jpg`}
             alt="avatar"
             className="w-[60px] h-[60px] rounded-full border-4 border-orange-700"
           />
