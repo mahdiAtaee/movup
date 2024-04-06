@@ -47,7 +47,7 @@ function PopularMovies() {
     </SwiperSlide>
   ))
   return (
-    <div className="my-8 w-full">
+    <div className="my-8 w-full px-4">
       <SectionTitle title="Popular Movies" />
       <div className="flex w-full overflow-x-auto overflow-y-hidden gap-4">
         <Swiper

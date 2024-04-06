@@ -2,6 +2,11 @@ import { useSelector } from 'react-redux'
 import PopularMovies from '../components/PopularMovies/PopularMovies'
 import TopRatedMovies from '../components/DiscoverMovies/TopRatedMovies'
 import HeroHeader from '../components/HeroHeader'
+import ScreamGenre from '../components/ScreamGenre'
+import AnimationGenre from '../components/AnimationGenre'
+import WarGenre from '../components/WarGenre'
+import AdventureGenre from '../components/AdventureGenre'
+import TVGenre from '../components/TVGenre'
 // import Trailers from '../components/Trailers'
 
 function Discover() {
@@ -15,6 +20,11 @@ function Discover() {
       <HeroHeader />
       <PopularMovies />
       <TopRatedMovies />
+      <ScreamGenre />
+      <AnimationGenre />
+      <WarGenre />
+      <AdventureGenre />
+      <TVGenre />
     </div>
   )
 }

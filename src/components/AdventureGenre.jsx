@@ -1,25 +1,49 @@
 /* eslint-disable import/no-unresolved */
+import { useState, useEffect, useLayoutEffect } from 'react'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { AiOutlinePlus, AiFillStar } from 'react-icons/ai'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'
 import { Link } from 'react-router-dom'
-import { useGetTopRatedMoviesQuery } from '../../redux/services/ApiCall'
+import { getDiscoverMovies } from '../services/FetchData'
 import 'swiper/css'
 import 'swiper/css/free-mode'
+import PIC from '../assets/digital.jpg'
 
-function TopRatedMovies() {
-  const { data } = useGetTopRatedMoviesQuery({ page: 1, language: 'en-us' })
-  const Movies = data?.results?.slice(0, 10).map((movie) => (
+const options = {
+  with_genres: 12, // war Genre
+  'vote_average.gte': 7,
+}
+
+function AdventureGenre() {
+  const [movies, setMovies] = useState(null)
+  const [imgSrc, setImgSrc] = useState(null)
+
+  useEffect(() => {
+    const res = getDiscoverMovies(options).then(({ data }) => setMovies(data))
+  }, [])
+
+  useLayoutEffect(() => {
+    const firstMovie = movies?.results && movies?.results[0]
+    setImgSrc(firstMovie?.backdrop_path)
+    console.log(imgSrc)
+  }, [movies])
+
+  const handleChangeBackImg = (movie) => {
+    setImgSrc(movie?.backdrop_path)
+  }
+
+  const Movies = movies?.results?.slice(0, 5).map((movie) => (
     <SwiperSlide
       key={movie.id}
       className="my-4 rounded-xl shadow-md relative"
-      style={{ width: '200px', height: '300px' }}>
-      <div className="w-[200px] relative">
+      onMouseEnter={() => handleChangeBackImg(movie)}
+      style={{ width: '400px', height: '300px' }}>
+      <div className="w-[400px] h-[300px] relative">
         <img
-          src={`https://image.tmdb.org/t/p/w200${movie?.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
           alt={movie.title}
-          className="w-full rounded-xl object-cover"
+          className="w-full h-full rounded-xl object-cover"
         />
         <div className="absolute bottom-20 left-4 w-10/12">
           <span className="font-bold text-xl font-primary block text-white truncate text-ellipsis">
@@ -47,17 +71,12 @@ function TopRatedMovies() {
   ))
 
   return (
-    <div className="my-8 w-full px-4">
-      <div className="flex items-center justify-between gap-4">
-        <h2 className="font-bold text-2xl font-Catamaran flex items-center gap-1">
-          Top Rated
-          <AiFillStar color="#daa520" />
-        </h2>
-        <Link to="/top-rated" className="flex items-center gap-2 text-gray-500">
-          See All
-          <MdKeyboardArrowRight size={24} />
-        </Link>
-      </div>
+    <div className="my-8 w-full h-[70vh] px-4 relative flex items-end">
+      <img
+        src={imgSrc ? `https://image.tmdb.org/t/p/w1280${imgSrc}` : PIC}
+        alt=""
+        className="absolute top-0 left-0 h-full object-cover w-full object-center"
+      />
       <div className="flex w-full overflow-x-auto overflow-y-hidden gap-4">
         <Swiper
           slidesPerView="auto"
@@ -73,4 +92,4 @@ function TopRatedMovies() {
   )
 }
 
-export default TopRatedMovies
+export default AdventureGenre

@@ -13,7 +13,7 @@ const initialState = {
   'release_date.gte': '',
   'release_date.lte': '',
 }
-const genres = []
+let genres = []
 
 const filterSlice = createSlice({
   name: 'filter',
@@ -71,6 +71,13 @@ const filterSlice = createSlice({
         with_genres: finalGenres,
       }
     },
+    RESET_GENRE_VALUE: (state) => {
+      genres = []
+      return {
+        ...state,
+        with_genres: '',
+      }
+    },
   },
 })
 
@@ -84,5 +91,6 @@ export const {
   CHANGE_KEYWORD_VALUE,
   ADD_GENRE_VALUE,
   DELETE_GENRE_VALUE,
+  RESET_GENRE_VALUE,
 } = filterSlice.actions
 export default filterSlice.reducer
